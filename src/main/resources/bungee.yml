@@ -1,0 +1,5 @@
+name: Portybungee
+version: '${project.version}'
+author:  Moehritz reworked by Marcobohl
+main: de.marcobohl.portybungee.Porty
+description: Porty Bungee
