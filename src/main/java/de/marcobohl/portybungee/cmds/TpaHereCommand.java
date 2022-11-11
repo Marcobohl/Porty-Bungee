@@ -35,13 +35,18 @@ public class TpaHereCommand extends BasePortyCommand {
             String targetName = args[0];
             ProxiedPlayer targetPlayer = ProxyServer.getInstance().getPlayer(targetName);
 
+            if (targetPlayer == fromPlayer) {
+                sendMessages(sender, PortyUtil.applyTag("<player>", targetName, Messages.getMessage("tphere_request_self", "&7You can't send your self a tphere request.")));
+                return;
+            }
+
             if (targetPlayer == null) {
                 sendMessages(sender, PortyUtil.applyTag("<player>", targetName, Messages.getMessage("player_not_found", "&7Can´t find the player &e<player>&7.")));
                 return;
             }
 
             Porty.getApi().getTeleportRequestHandler().addTpaHereRequest(fromPlayer, targetPlayer);
-            sendMessage(fromPlayer, Messages.getMessage("tpa_request_sent", "Your request has been sent to &e<player>").replace("<player>", targetName));
+            sendMessage(fromPlayer, Messages.getMessage("tphere_request_sent", "Your request has been sent to &e<player>").replace("<player>", targetName));
 
 
 
@@ -59,7 +64,7 @@ public class TpaHereCommand extends BasePortyCommand {
 
             targetPlayer.sendMessage();
             targetPlayer.sendMessage(new ComponentBuilder(Messages.getMessage("prefixMain", "&e[TP]")).append(" ").append(accaptmesage).create());
-            targetPlayer.sendMessage(new ComponentBuilder(Messages.getMessage("tpa_secontline", "Use")).append(" ").append(tpaccept).append(" ").append(Messages.getMessage("tpa_secontstroke","or")).append(" ").append(tpdeny).append(" ").append(Messages.getMessage("tpa_secontbehind", "in order to respond to it")).create());
+            targetPlayer.sendMessage(new ComponentBuilder(Messages.getMessage("tpahere_secontline", "Use")).append(" ").append(tpaccept).append(" ").append(Messages.getMessage("tpahere_secontstroke","or")).append(" ").append(tpdeny).append(" ").append(Messages.getMessage("tpahere_secontbehind", "in order to respond to it")).create());
             targetPlayer.sendMessage();
 
 
