@@ -34,6 +34,7 @@ Moehritz: https://github.com/Moehritz
 - porty.cmd.tpahere
 - porty.cmd.tpaccept
 - porty.cmd.tpdeny
+- porty.notimer or porty.notimer.servername 
 
 - porty.cmd.reload
 
