@@ -27,13 +27,19 @@ tpa_help: ["&7Asks a player to teleport to him","&7/tpa <player> - Sends the req
 tpa_request_sent: "&7Your request has been sent to &e<player>"
 tpa_request_self: "&7You can't send your self a tpa request."
 
+# Exampel ingame
+#  emty line
+#  [TP] &7The player &e<player>&7 asks you to teleport to you.    prefixMain - tpa
+#  &7Use &eAccept &7or &eDeny &7in order to respond to it         tpa_secontline - tpaccept_click - tpa_secontstroke - tpdeny_click - tpa_secontbehind
+#  emty line
+
 tpa: "&7The player &e<player>&7 asks you to teleport to you:"
 tpa_secontline: "&7Use"
 tpa_secontstroke: "&7or"
 tpa_secontbehind: "&7in order to respond to it"
 
 tpahere_help: ["&7Asks a player to teleport to you","&7/tpa <player> - Sends the request, it can be accepted with /tpaccept or denied with /tpdeny"]
-tpahere: "&7The player &e<player> &7asks you to teleport to him. Use &e/tpaccept&7 or &e/tpdeny&7 in order to respond to it"
+tpahere: "&7The player &e<player> &7asks you to teleport to him."
 player_not_found: "&7Can not find the player &e<player>"
 console_warning: "&7You can not use this command as console or commandblocks"
 teleport_cooldown: "&7Do not move for &e<time> &7seconds!"

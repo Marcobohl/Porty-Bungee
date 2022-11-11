@@ -5,6 +5,10 @@ import de.marcobohl.portybungee.Porty;
 import de.marcobohl.portybungee.PortyUtil;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 public class TpaHereCommand extends BasePortyCommand {
@@ -37,8 +41,28 @@ public class TpaHereCommand extends BasePortyCommand {
             }
 
             Porty.getApi().getTeleportRequestHandler().addTpaHereRequest(fromPlayer, targetPlayer);
-            sendMessage(fromPlayer, Messages.getMessage("tpa_request_sent", "Your request has been sent"));
-            sendMessages(targetPlayer, PortyUtil.applyTag("<player>", fromPlayer.getName(), Messages.getMessage("tpahere", "&7The player &e<player> &7asks you to teleport to him. Use &e/tpaccept&7 or &e/tpdeny&7 in order to respond to it.")));
+            sendMessage(fromPlayer, Messages.getMessage("tpa_request_sent", "Your request has been sent to &e<player>").replace("<player>", targetName));
+
+
+
+            TextComponent tpaccept = new TextComponent(Messages.getMessage("tpaccept_click", "/tpaccept"));
+            tpaccept.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tpaccept"));
+            tpaccept.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Messages.getMessage("tpaccept_hover_message", "Click to accept")).create()));
+
+            TextComponent tpdeny= new TextComponent(Messages.getMessage("tpdeny_click", "/tpdeny"));
+            tpdeny.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tpdeny"));
+            tpdeny.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Messages.getMessage("tpdeny_hover_message", "Click to deny")).create()));
+
+            TextComponent accaptmesage = new TextComponent(Messages.getMessage("tpahere", "&7The player &e<player> &7asks you to teleport to him.").replace("<player>", fromPlayer.getName()));
+
+            // sendMessages(targetPlayer, PortyUtil.applyTag("<player>", fromPlayer.getName(), Messages.getMessage("tpahere", "&7The player &e<player> &7asks you to teleport to him. Use &e/tpaccept&7 or &e/tpdeny&7 in order to respond to it.")));
+
+            targetPlayer.sendMessage();
+            targetPlayer.sendMessage(new ComponentBuilder(Messages.getMessage("prefixMain", "&e[TP]")).append(" ").append(accaptmesage).create());
+            targetPlayer.sendMessage(new ComponentBuilder(Messages.getMessage("tpa_secontline", "Use")).append(" ").append(tpaccept).append(" ").append(Messages.getMessage("tpa_secontstroke","or")).append(" ").append(tpdeny).append(" ").append(Messages.getMessage("tpa_secontbehind", "in order to respond to it")).create());
+            targetPlayer.sendMessage();
+
+
 
         } else {
             sendWrongUsage(sender);
